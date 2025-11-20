@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gia Đình Tái Hôn</title>
+
+  <style>
+    :root {
+      --bg: #f3f4f6;
+      --bg-card: #ffffff;
+      --bg-accent: #e5f0ff;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --primary: #2563eb;
+      --primary-soft: #dbeafe;
+      --border-soft: #e5e7eb;
+      --radius-lg: 18px;
+      --shadow-soft: 0 14px 35px rgba(15, 23, 42, 0.12);
+      --max-width: 1100px;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: radial-gradient(circle at top, #e0edff, #f3f4f6 45%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 16px 20px 40px;
+    }
+
+    /* --- SIDEBAR LAYOUT --- */
+    .layout-shell {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: 20px;
+    }
+
+    .sidebar {
+      align-self: flex-start;
+      position: sticky;
+      top: 70px;
+      max-height: calc(100vh - 80px);
+      overflow-y: auto;
+      background: #ffffffaa;
+      padding: 14px 12px;
+      border-radius: 16px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 30px rgba(15,23,42,0.12);
+    }
+
+    .sidebar-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .sidebar-section-label {
+      color: #6b7280;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      margin-top: 10px;
+      margin-bottom: 4px;
+      letter-spacing: .05em;
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 6px 0;
+    }
+
+    .sidebar-nav li {
+      margin-bottom: 4px;
+    }
+
+    .sidebar-nav a {
+      display: block;
+      padding: 5px 8px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #374151;
+      font-size: 0.82rem;
+      border: 1px solid transparent;
+    }
+    .sidebar-nav a:hover {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+      color: #1d4ed8;
+    }
+
+    .main-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #93c5fd, #1d4ed8);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .brand-text-main {
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .brand-text-sub {
+      font-size: 11px;
+      color: #737373;
+    }
+
+    .theme-toggle {
+      font-size: 0.75rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      background: #ffffffaa;
+      cursor: pointer;
+    }
+
+    main {
+      margin-top: 4px;
+    }
+
+    /* CARDS */
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 16px 14px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      margin-bottom: 16px;
+    }
+
+    .pill-label {
+      background: var(--primary-soft);
+      color: #1d4ed8;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+    }
+
+    /* DETAILS */
+    details {
+      padding: 10px 11px;
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      margin-bottom: 10px;
+    }
+    details summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+    }
+    summary::before {
+      content: "▸";
+      margin-right: 6px;
+      font-size: 0.7rem;
+    }
+    details[open] summary::before {
+      content: "▾";
+    }
+
+    /* DARK MODE */
+    body[data-theme="dark"] {
+      background: radial-gradient(circle at top, #020617, #020617 40%);
+      color: #e5e7eb;
+    }
+    body[data-theme="dark"] .card {
+      background: #020617;
+      border-color: #1e293b;
+    }
+    body[data-theme="dark"] .sidebar {
+      background: #020617;
+      border-color: #1e293b;
+      color: #cbd5e1;
+    }
+    body[data-theme="dark"] .sidebar-nav a {
+      color: #cbd5f5;
+    }
+    body[data-theme="dark"] .sidebar-nav a:hover {
+      background: #0f172a;
+      border-color: #1d4ed8;
+      color: #bfdbfe;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 880px) {
+      .layout-shell {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        position: static;
+        max-height: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page layout-shell">
+    
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-title">Sổ tay gia đình tái hôn</div>
+
+      <div class="sidebar-section-label">Tổng quan</div>
+      <ul class="sidebar-nav">
+        <li><a href="#tong-quan">Giới thiệu</a></li>
+      </ul>
+
+      <div class="sidebar-section-label">Trước hôn nhân</div>
+      <ul class="sidebar-nav">
+        <li><a href="#truoc-hon-nhan">Chuẩn bị & thống nhất</a></li>
+        <li><a href="#alignment-checklist">Alignment Checklist</a></li>
+      </ul>
+
+      <div class="sidebar-section-label">Sau khi cưới</div>
+      <ul class="sidebar-nav">
+        <li><a href="#sau-cuoi">Vận hành gia đình</a></li>
+        <li><a href="#be">Quan hệ với bé</a></li>
+        <li><a href="#do-luong">Đo lường</a></li>
+        <li><a href="#nhat-ky">Nhật ký</a></li>
+      </ul>
+
+      <div class="sidebar-section-label">Từng thành viên</div>
+      <ul class="sidebar-nav">
+        <li><a href="#for-wife">Cho vợ</a></li>
+        <li><a href="#for-child">Cho con</a></li>
+        <li><a href="#for-grandma">Bà ngoại</a></li>
+        <li><a href="#for-paternal">Bên nội</a></li>
+      </ul>
+
+      <div class="sidebar-section-label">Khác</div>
+      <ul class="sidebar-nav">
+        <li><a href="#crisis-plan">Crisis Plan</a></li>
+        <li><a href="#tools">Công cụ</a></li>
+      </ul>
+    </aside>
+
+    <!-- MAIN PANEL -->
+    <div class="main-panel">
+
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-icon">G</div>
+          <div>
+            <div class="brand-text-main">Gia Đình Tái Hôn</div>
+            <div class="brand-text-sub">Sổ tay hôn nhân & nuôi dạy con</div>
+          </div>
+        </div>
+
+        <button id="theme-toggle" class="theme-toggle">🌙 Dark</button>
+      </header>
+
+      <main>
+        {{ content }}
+      </main>
+
+      <footer>
+        <p style="font-size:0.75rem;color:#6b7280;">
+          © Gia đình tái hôn – Sổ tay xây dựng hạnh phúc bền vững.
+        </p>
+      </footer>
+    </div>
+
+  </div>
+
+<script>
+  (function () {
+    const body = document.body;
+    const btn = document.getElementById("theme-toggle");
+
+    function apply(theme) {
+      if (theme === "dark") {
+        body.dataset.theme = "dark";
+        btn.textContent = "☀️ Light";
+      } else {
+        delete body.dataset.theme;
+        btn.textContent = "🌙 Dark";
+      }
+    }
+    const saved = localStorage.getItem("theme");
+    if (saved) apply(saved);
+
+    btn.addEventListener("click", () => {
+      const next = body.dataset.theme === "dark" ? "light" : "dark";
+      apply(next);
+      localStorage.setItem("theme", next);
+    });
+  })();
+</script>
+
+</body>
+</html>
