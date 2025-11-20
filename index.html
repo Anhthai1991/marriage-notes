@@ -1,0 +1,556 @@
+
+---
+
+## 2️⃣ HTML với theme đẹp hơn (index.html)
+
+Dưới đây là phiên bản **theme đẹp hơn, dễ đọc, có navigation trên cùng**, nền dịu, layout gọn.  
+Bạn có thể dùng làm **`index.html`** (thay cho bản trước):
+
+```html
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hướng Dẫn Xây Dựng Gia Đình Tái Hôn</title>
+  <style>
+    :root {
+      --bg: #f3f4f6;
+      --bg-card: #ffffff;
+      --bg-accent: #e5f0ff;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --primary: #2563eb;
+      --primary-soft: #dbeafe;
+      --border-soft: #e5e7eb;
+      --radius-lg: 18px;
+      --shadow-soft: 0 14px 35px rgba(15, 23, 42, 0.12);
+      --max-width: 960px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #e0edff, #f3f4f6 45%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 16px 16px 40px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(
+        to bottom,
+        rgba(243, 244, 246, 0.95),
+        rgba(243, 244, 246, 0.7),
+        transparent
+      );
+      margin: -16px -16px 16px;
+      padding: 12px 16px 8px;
+      border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #93c5fd, #1d4ed8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+      box-shadow: 0 8px 22px rgba(37, 99, 235, 0.4);
+    }
+
+    .brand-text-main {
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .brand-text-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 12px;
+    }
+
+    .nav-links a {
+      padding: 4px 10px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: var(--text-muted);
+      border: 1px solid transparent;
+      transition: all 0.15s ease-out;
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+      border-color: var(--primary-soft);
+      background: white;
+    }
+
+    main {
+      margin-top: 8px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #eff6ff, #ffffff);
+      border-radius: 24px;
+      padding: 20px 18px 18px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(209, 213, 219, 0.7);
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: 1.5rem;
+    }
+
+    .hero-subtitle {
+      margin: 0 0 10px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 800px) {
+      .section-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      header {
+        position: static;
+      }
+
+      .hero {
+        border-radius: 18px;
+      }
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 16px 14px 12px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      margin-bottom: 16px;
+    }
+
+    .card h2,
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .card p {
+      margin-top: 0;
+      margin-bottom: 6px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .pill-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--bg-accent);
+      color: #1d4ed8;
+      margin-bottom: 6px;
+    }
+
+    details {
+      border-radius: 14px;
+      border: 1px solid var(--border-soft);
+      padding: 10px 11px;
+      background: #f9fafb;
+      margin-bottom: 8px;
+      font-size: 0.86rem;
+    }
+
+    details[open] {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::before {
+      content: "▸";
+      display: inline-block;
+      margin-right: 6px;
+      font-size: 0.7rem;
+      transform: translateY(-1px);
+    }
+
+    details[open] summary::before {
+      content: "▾";
+    }
+
+    .code-block {
+      font-family: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono",
+        "Courier New", monospace;
+      font-size: 0.8rem;
+      background: rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      padding: 10px 12px;
+      border-radius: 10px;
+      overflow-x: auto;
+      margin-top: 6px;
+      white-space: pre;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 4px 0 6px;
+    }
+
+    li {
+      margin-bottom: 2px;
+      font-size: 0.86rem;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .tagline {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="nav-inner">
+        <div class="brand">
+          <div class="brand-icon">G</div>
+          <div>
+            <div class="brand-text-main">Gia Đình Tái Hôn</div>
+            <div class="brand-text-sub">Sổ tay chuẩn bị tâm lý & kế hoạch dài hạn</div>
+          </div>
+        </div>
+        <nav class="nav-links">
+          <a href="#tong-quan">Tổng quan</a>
+          <a href="#truoc-hon-nhan">Trước hôn nhân</a>
+          <a href="#sau-cuoi">Sau khi cưới</a>
+          <a href="#be">Quan hệ với bé</a>
+          <a href="#do-luong">Đo lường & xung đột</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="tong-quan">
+        <h1>Hướng Dẫn Xây Dựng Gia Đình Tái Hôn (Có Con Riêng)</h1>
+        <p class="hero-subtitle">
+          Tổng hợp toàn bộ tư vấn, kế hoạch, kịch bản và cam kết cho hành trình
+          kết hôn với người đã có con riêng, theo bối cảnh Việt Nam.
+        </p>
+        <div class="hero-badges">
+          <span class="badge">Tâm lý học gia đình</span>
+          <span class="badge">Gia đình tái hôn</span>
+          <span class="badge">Bối cảnh Việt Nam</span>
+        </div>
+        <div class="hero-meta">
+          <span>🎯 Mục tiêu: an toàn – rõ ràng – đồng lòng</span>
+          <span>👨‍👩‍👧 Thành viên: bạn – vợ – bé – chồng cũ – bên nội</span>
+        </div>
+      </section>
+
+      <div class="section-grid">
+        <!-- Cột trái: nội dung chính -->
+        <div>
+          <section class="card" id="truoc-hon-nhan">
+            <span class="pill-label">Giai đoạn 1 · Trước hôn nhân</span>
+            <h2>1. Chuẩn bị & thống nhất trước khi cưới</h2>
+            <p>Những điều cần rõ ràng để giảm xung đột về sau.</p>
+
+            <details>
+              <summary>1.1 Checklist 20 câu hỏi</summary>
+              <div class="code-block">
+- Vai trò của anh với bé là gì?
+- Em mong đợi anh hỗ trợ bé ở mức nào?
+- Nguyên tắc xử lý khi khác ý về giáo dục bé?
+- Ranh giới khi giao tiếp với chồng cũ?
+- Tài chính: ai chi gì cho bé, ai chi gì cho gia đình?
+- Kế hoạch sinh con chung và phân chia nguồn lực?
+- Điều mỗi người lo lắng nhất về hôn nhân này?
+              </div>
+            </details>
+
+            <details>
+              <summary>1.2 Phân tích rủi ro theo kịch bản</summary>
+              <ul>
+                <li><b>Bé:</b> so sánh với bố, sợ mất mẹ, chống đối nhẹ.</li>
+                <li><b>Chồng cũ & bên nội:</b> can thiệp, khác quan điểm nuôi dạy.</li>
+                <li><b>Vợ chồng:</b> cảm giác bị bỏ rơi, ghen ngầm, thiếu thời gian.</li>
+                <li><b>Tài chính:</b> cảm giác gánh nặng hoặc bất công giữa các con.</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>1.3 Kế hoạch 6 tháng chuẩn bị tâm lý</summary>
+              <div class="code-block">
+Tháng 1: Hiểu mình & hiểu hoàn cảnh
+Tháng 2: Xây nền giao tiếp ổn định với vợ
+Tháng 3: Bắt đầu xây dựng quan hệ nhẹ nhàng với bé
+Tháng 4: Thống nhất ranh giới & chồng cũ
+Tháng 5: Tài chính & kế hoạch giáo dục / con chung
+Tháng 6: Mô phỏng cuộc sống hôn nhân, viết bản cam kết
+              </div>
+            </details>
+
+            <details>
+              <summary>1.4 Thỏa thuận ranh giới & cam kết hôn nhân</summary>
+              <ul>
+                <li>Ranh giới về con riêng, chồng cũ, tiền bạc, cảm xúc.</li>
+                <li>Cam kết không cãi nhau trước mặt bé.</li>
+                <li>Cam kết minh bạch khi liên lạc với chồng cũ.</li>
+                <li>Cam kết mỗi tháng có thời gian riêng cho hai vợ chồng.</li>
+              </ul>
+            </details>
+          </section>
+
+          <section class="card" id="sau-cuoi">
+            <span class="pill-label">Giai đoạn 2 · Sau khi cưới</span>
+            <h2>2. Hòa nhập & vận hành gia đình sau kết hôn</h2>
+            <p>Tập trung vào ổn định nhịp sống, không ép “thân ngay”.</p>
+
+            <details>
+              <summary>2.1 Kế hoạch 3 tháng hoà nhập với bé</summary>
+              <div class="code-block">
+Tháng 1: An toàn – bé quen sự hiện diện của bạn
+Tháng 2: Tạo thói quen gia đình (ăn tối, cuối tuần)
+Tháng 3: Tăng gắn kết, dạy kỹ năng nhỏ, làm việc nhà chung
+              </div>
+            </details>
+
+            <details>
+              <summary>2.2 Kế hoạch 5 năm gia đình tái hôn bền vững</summary>
+              <div class="code-block">
+Năm 1: Ổn định & nền tảng
+Năm 2: Gắn kết (bonding)
+Năm 3: Củng cố vị trí của bạn trong đời bé
+Năm 4: Dạy bé tự lập dần
+Năm 5: Gia đình vận hành như một hệ thống hoàn chỉnh
+              </div>
+            </details>
+
+            <details>
+              <summary>2.3 Bộ quy tắc nuôi dạy bé chung – 6 nguyên tắc vàng</summary>
+              <ul>
+                <li>Quan hệ trước – kỷ luật sau.</li>
+                <li>Không cạnh tranh với bố ruột.</li>
+                <li>Tôn trọng vai trò của mẹ.</li>
+                <li>Nhất quán – rõ ràng – nhẹ nhàng.</li>
+                <li>Không tranh cãi trước mặt bé.</li>
+                <li>Tạo nhiều khoảnh khắc tích cực nhỏ mỗi ngày.</li>
+              </ul>
+            </details>
+          </section>
+
+          <section class="card" id="be">
+            <span class="pill-label">Trọng tâm · Bé 6 tuổi</span>
+            <h2>3. Quan hệ giữa bạn & bé</h2>
+            <p>Mục tiêu: trở thành “người bạn lớn an toàn”, không thay thế bố.</p>
+
+            <details>
+              <summary>3.1 Giáo án 12 tuần – trở thành người bạn lớn</summary>
+              <div class="code-block">
+Tuần 1–4: Xuất hiện nhẹ, hoạt động song song, tạo góc riêng cho bé
+Tuần 5–8: Routine buổi tối & cuối tuần, khen hành vi, không so sánh
+Tuần 9–12: Trò chuyện cảm xúc, hoạt động 2 người, ritual gia đình nhỏ
+              </div>
+            </details>
+
+            <details>
+              <summary>3.2 Kịch bản giao tiếp 1–1 với bé</summary>
+              <ul>
+                <li>Khi bé ngại: “Khi nào con muốn nói, chú/anh luôn ở đây.”</li>
+                <li>Khi bé hỏi “chú/anh là ai?” → “Người bạn lớn của con.”</li>
+                <li>Khi bé hỏi về bố → “Bố con luôn là bố của con, chú/anh chỉ giúp thêm.”</li>
+                <li>Khi bé làm tốt → khen nỗ lực, không gắn nhãn “con giỏi quá”.</li>
+              </ul>
+            </details>
+          </section>
+
+          <section class="card" id="do-luong">
+            <span class="pill-label">Quản trị xung đột & theo dõi</span>
+            <h2>4. Đo lường sự hoà hợp & xử lý xung đột nhẹ</h2>
+            <p>Để không bị “âm ỉ lâu ngày rồi nổ”.</p>
+
+            <details>
+              <summary>4.1 Thang đo hoà hợp hàng tháng</summary>
+              <div class="code-block">
+Mỗi tháng chấm 0–10 cho các câu hỏi:
+- Bé có cảm thấy an toàn khi ở nhà?
+- Bạn có thoải mái khi bé ở cùng?
+- Hai vợ chồng đồng thuận về cách dạy con?
+- Xung đột tăng hay giảm?
+- Bé có chủ động tương tác với bạn nhiều hơn?
+              </div>
+            </details>
+
+            <details>
+              <summary>4.2 Mẫu tin nhắn xử lý xung đột nhẹ</summary>
+              <div class="code-block">
+“Anh hiểu hôm nay em mệt nên cảm xúc hơi căng. 
+Mình nói chuyện kỹ hơn khi em đỡ mệt nhé. Anh luôn đứng cùng phía em.”
+
+“Chuyện này làm anh hơi buồn một chút. 
+Lúc nào em rảnh mình nói nhẹ lại, để hai đứa hiểu nhau hơn.”
+              </div>
+            </details>
+
+            <details>
+              <summary>4.3 Kịch bản xử lý tình huống khó</summary>
+              <ul>
+                <li>Bé chống đối: không ép, không cá nhân hoá, cho bé quyền chọn.</li>
+                <li>Chồng cũ gây khó: vợ đứng mũi chịu sào, bạn hỗ trợ phía sau.</li>
+                <li>Bất đồng chuyện dạy bé: không tranh luận trước mặt bé.</li>
+                <li>Bạn thấy bị bỏ rơi: nói về cảm xúc, không đổ lỗi.</li>
+                <li>Bên nội nói xấu bạn: bảo vệ bé, tránh lôi bé vào xung đột.</li>
+              </ul>
+            </details>
+          </section>
+        </div>
+
+        <!-- Cột phải: quick reference -->
+        <aside>
+          <section class="card">
+            <span class="pill-label">Quick view</span>
+            <h3>Tóm tắt “luật chơi” cốt lõi</h3>
+            <ul>
+              <li>Luôn đứng cùng phía với vợ trước mặt người ngoài.</li>
+              <li>Không ai được dùng bé để tấn công người kia.</li>
+              <li>Không cạnh tranh vai trò với bố ruột.</li>
+              <li>Không tranh cãi trước mặt bé, kể cả chuyện nhỏ.</li>
+              <li>Bất cứ điều gì nhạy cảm → nói riêng, nói sớm, nói nhẹ.</li>
+            </ul>
+            <p class="tagline">
+              Gia đình tái hôn không cần hoàn hảo, chỉ cần nhất quán & tử tế với nhau.
+            </p>
+          </section>
+
+          <section class="card">
+            <span class="pill-label">Dành cho vợ của bạn</span>
+            <h3>5 nguyên tắc dung hoà chồng mới – con – chồng cũ</h3>
+            <ul>
+              <li>Minh bạch với chồng mới về mọi liên lạc với chồng cũ.</li>
+              <li>Không để con kẹt ở giữa mâu thuẫn người lớn.</li>
+              <li>Luôn thống nhất với chồng mới trước khi hứa với bên nội.</li>
+              <li>Bảo vệ không gian cảm xúc của chồng mới (không xem nhẹ cảm xúc).</li>
+              <li>Luôn nói với con: “Cả bố và mẹ (và chú/anh) đều yêu con.”</li>
+            </ul>
+          </section>
+
+          <section class="card">
+            <span class="pill-label">Ghi chú cá nhân</span>
+            <h3>Cách dùng trang này</h3>
+            <p>
+              Bạn có thể in ra, đánh dấu, hoặc ghi thêm ý riêng vào từng mục (nếu
+              sửa file HTML). Mỗi 3–6 tháng, quay lại xem:
+            </p>
+            <ul>
+              <li>Chúng ta đang làm tốt ở mục nào?</li>
+              <li>Mục nào đang bị lơ là?</li>
+              <li>Có quy tắc nào cần cập nhật lại không?</li>
+            </ul>
+          </section>
+        </aside>
+      </div>
+
+      <footer>
+        <p>
+          Đây là “sổ tay chiến lược” cho chính bạn – hãy dùng nó để đối thoại
+          với vợ một cách trưởng thành và nhẹ nhàng.
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
