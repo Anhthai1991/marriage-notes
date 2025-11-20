@@ -6,6 +6,86 @@
   <title>Hướng Dẫn Xây Dựng Gia Đình Tái Hôn</title>
   <style>
     :root {
+      /* Dark mode */
+body[data-theme="dark"] {
+  background: radial-gradient(circle at top, #020617, #020617 45%);
+  color: #e5e7eb;
+}
+
+body[data-theme="dark"] .card {
+  background: #020617;
+  border-color: #1e293b;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+}
+
+body[data-theme="dark"] .hero {
+  background: linear-gradient(135deg, #0b1220, #020617);
+  border-color: #1e293b;
+}
+
+body[data-theme="dark"] .pill-label {
+  background: #0f172a;
+  color: #93c5fd;
+}
+
+body[data-theme="dark"] .badge {
+  background: #1d4ed8;
+  color: #e5e7eb;
+  border-color: #1d4ed8;
+}
+
+body[data-theme="dark"] .nav-links a {
+  background: rgba(15, 23, 42, 0.85);
+  color: #cbd5f5;
+}
+
+body[data-theme="dark"] .nav-links a:hover {
+  background: #0f172a;
+  border-color: #1d4ed8;
+  color: #bfdbfe;
+}
+
+body[data-theme="dark"] details {
+  background: #020617;
+  border-color: #1e293b;
+}
+
+body[data-theme="dark"] details[open] {
+  background: #020617;
+  border-color: #1d4ed8;
+}
+
+body[data-theme="dark"] .code-block {
+  background: #020617;
+  color: #e5e7eb;
+}
+
+body[data-theme="dark"] footer {
+  color: #9ca3af;
+}
+
+.theme-toggle {
+  font-size: 0.75rem;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.theme-toggle:hover {
+  background: #ffffff;
+  border-color: #9ca3af;
+}
+
+body[data-theme="dark"] .theme-toggle {
+  background: #020617;
+  color: #e5e7eb;
+  border-color: #1f2937;
+}
       --bg: #f3f4f6;
       --bg-card: #ffffff;
       --bg-accent: #e5f0ff;
@@ -331,7 +411,10 @@
           <a href="#do-luong">Đo lường & xung đột</a>
           <a href="#nhat-ky">Nhật ký</a>
           <a href="#faq">FAQ</a>
+          <a href="#for-wife">Cho vợ</a>
+          <a href="#crisis-plan">Crisis</a>
         </nav>
+<button id="theme-toggle" type="button" class="theme-toggle">🌙 Dark</button>
       </div>
     </header>
 
@@ -564,6 +647,53 @@ Lúc nào em rảnh mình nói nhẹ lại, để hai đứa hiểu nhau hơn.�
               </ul>
             </details>
           </section>
+<section class="card" id="tools">
+  <span class="pill-label">Công cụ thực hành</span>
+  <h2>12. Bộ công cụ theo dõi & luyện giao tiếp</h2>
+  <p>
+    Đây là phần “thực chiến”: tính điểm hoà hợp, checklist nhanh, và bài tập nói chuyện.
+  </p>
+
+  <details open>
+    <summary>12.1 Máy tính điểm hoà hợp gia đình (Family Harmony Score)</summary>
+    <p>Chấm từ 0–10 cho từng mục, rồi bấm tính.</p>
+    <div>
+      <label>1. Bé cảm thấy an toàn: <input type="number" id="score-safe" min="0" max="10" value="7"></label><br>
+      <label>2. Bạn thoải mái khi bé ở nhà: <input type="number" id="score-comfort" min="0" max="10" value="7"></label><br>
+      <label>3. Đồng thuận vợ chồng về dạy con: <input type="number" id="score-align" min="0" max="10" value="7"></label><br>
+      <label>4. Mức xung đột (đảo điểm: 0 = nhiều, 10 = ít): <input type="number" id="score-conflict" min="0" max="10" value="7"></label><br>
+      <label>5. Chủ động tương tác của bé với bạn: <input type="number" id="score-bond" min="0" max="10" value="7"></label><br><br>
+      <button type="button" onclick="calcHarmony()">Tính điểm</button>
+      <p id="harmony-result" class="tagline"></p>
+    </div>
+  </details>
+
+  <details>
+    <summary>12.2 Daily checklist 5 dòng</summary>
+    <div class="code-block">
+[ ] Hôm nay mình đã mỉm cười với bé ít nhất 1 lần  
+[ ] Hôm nay mình đã nói 1 câu tích cực với vợ  
+[ ] Hôm nay mình không nói xấu ai trước mặt bé  
+[ ] Hôm nay mình đã lắng nghe hơn là phản ứng  
+[ ] Hôm nay mình ghi nhận 1 điều nhỏ mình làm tốt
+    </div>
+  </details>
+
+  <details>
+    <summary>12.3 Bài tập giao tiếp vợ chồng (1 lần/tuần)</summary>
+    <ul>
+      <li>Chọn 1 buổi tối, tắt TV, để điện thoại sang một bên.</li>
+      <li>Mỗi người trả lời 3 câu:
+        <ol>
+          <li>Tuần này em/anh biết ơn điều gì ở người kia?</li>
+          <li>Tuần này em/anh thấy khó nhất ở chỗ nào?</li>
+          <li>Tuần sau em/anh mong điều gì nhỏ nhất có thể thay đổi?</li>
+        </ol>
+      </li>
+      <li>Không phản biện trong lúc người kia đang chia sẻ, chỉ hỏi lại để hiểu rõ hơn.</li>
+    </ul>
+  </details>
+</section>
 
           <section class="card" id="nhat-ky">
             <span class="pill-label">Thực hành cá nhân</span>
@@ -770,8 +900,183 @@ Hướng xử lý:
           </ul>
         </details>
       </section>
+<section class="card" id="for-child">
+  <span class="pill-label">Dành cho con</span>
+  <h2>9. Gửi con – Người bạn nhỏ của nhà mình</h2>
+  <p>
+    Đây là vài điều ba/dượng/chú (tuỳ cách xưng) và mẹ muốn con biết.
+    Nếu sau này con đọc được, hãy nhớ là:
+  </p>
+
+  <details open>
+    <summary>9.1 Con không phải chọn phe</summary>
+    <p>
+      Con không cần phải chọn “mẹ” hay “bố”, cũng không phải chọn “bố” hay “chú/anh”.
+      Tất cả người lớn đều cùng mong con vui và an toàn.
+    </p>
+  </details>
+
+  <details>
+    <summary>9.2 Người lớn cũng có lúc mệt</summary>
+    <p>
+      Khi mẹ hay chú/anh ít nói, có thể là người lớn mệt thôi, không phải hết thương con.
+      Con cứ ôm mẹ hoặc gọi chú/anh, người lớn sẽ rất vui.
+    </p>
+  </details>
+
+  <details>
+    <summary>9.3 Con được quyền nói “Con không thích”</summary>
+    <p>
+      Nếu hôm nào con không muốn chơi, không muốn nói chuyện, con có thể nói:
+      “Hôm nay con mệt, mai mình chơi tiếp được không?” — như vậy là rất dũng cảm rồi.
+    </p>
+  </details>
+
+  <details>
+    <summary>9.4 Con luôn được yêu thương</summary>
+    <p>
+      Dù con ở với ai – với bố, với mẹ, hay về nhà cuối tuần –
+      thì con vẫn là con, vẫn đáng yêu và xứng đáng được yêu thương.
+    </p>
+  </details>
+</section>
+<section class="card" id="for-grandma">
+  <span class="pill-label">Dành cho bà ngoại / bên ngoại</span>
+  <h2>10. Gửi bà ngoại & gia đình bên ngoại</h2>
+  <p>
+    Phần này dành cho những người thân bên ngoại – những người thường lo
+    cho cả mẹ và bé, đôi khi lo lắng khi mẹ tái hôn.
+  </p>
+
+  <details open>
+    <summary>10.1 Điều bà lo là rất bình thường</summary>
+    <ul>
+      <li>Lo con gái bị thiệt thòi.</li>
+      <li>Lo cháu ngoại bị đối xử không công bằng.</li>
+      <li>Lo gia đình mới phức tạp, cháu rối.</li>
+    </ul>
+    <p>
+      Tất cả những lo đó đều rất tự nhiên – và chính vì vậy, bà rất quan trọng
+      trong việc giúp cháu cảm thấy an toàn.
+    </p>
+  </details>
+
+  <details>
+    <summary>10.2 Những điều bà làm giúp cháu rất nhiều</summary>
+    <ul>
+      <li>Không nói xấu bất kỳ người lớn nào trước mặt cháu.</li>
+      <li>Khi cháu kể chuyện, nghe hết – không vội phán xét.</li>
+      <li>Nhắc lại với cháu rằng: “Bà biết ai cũng thương con/cháu.”</li>
+      <li>Khi có chuyện không vừa ý, góp ý riêng với mẹ, không nói qua cháu.</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>10.3 Cách ủng hộ gia đình mới mà vẫn bảo vệ cháu</summary>
+    <p>
+      Bà có thể vừa ủng hộ con gái xây dựng hạnh phúc mới, vừa để mắt
+      tới cảm xúc của cháu. Khi thấy điều gì bất thường, bà trao đổi với mẹ
+      một cách nhẹ nhàng, không đẩy cháu vào thế “chọn bên”.
+    </p>
+  </details>
+</section>
+<section class="card" id="for-paternal">
+  <span class="pill-label">Dành cho bên nội / bố ruột</span>
+  <h2>11. Gửi bố ruột & gia đình bên nội</h2>
+  <p>
+    Đây là phần giải thích ngắn gọn về cách gia đình mới muốn cùng phối hợp,
+    để bé không bị kẹt giữa hai bên.
+  </p>
+
+  <details open>
+    <summary>11.1 Nguyên tắc chung</summary>
+    <ul>
+      <li>Bé có quyền yêu cả hai bên nội – ngoại, cả bố và mẹ.</li>
+      <li>Không bên nào “giành quyền sở hữu” bé.</li>
+      <li>Mọi quyết định lớn liên quan tới bé nên được trao đổi, không áp đặt.</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>11.2 Vai trò của người bạn đời mới của mẹ</summary>
+    <ul>
+      <li>Không thay thế vai trò bố ruột.</li>
+      <li>Là người hỗ trợ thêm để bé có thêm một người lớn đáng tin.</li>
+      <li>Tôn trọng sự hiện diện và vị trí của bố ruột trong đời bé.</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>11.3 Những điều hai bên nên tránh</summary>
+    <ul>
+      <li>Dùng bé làm “người đưa tin” hoặc “bên thứ ba”.</li>
+      <li>Nói xấu bên kia trước mặt bé.</li>
+      <li>Ép bé trả lời những câu hỏi như “Con thương ai hơn?”.</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>11.4 Câu cam kết chung (có thể gửi riêng)</summary>
+    <div class="code-block">
+“Mục tiêu chung của chúng ta là bé lớn lên an toàn, khoẻ mạnh, không bị kẹt giữa người lớn.
+Bất đồng có thể còn, nhưng xin cùng tôn trọng nhau trong vai trò bố – mẹ – người nuôi dưỡng bé.”
+    </div>
+  </details>
+</section>
 
 </main>
   </div>
+  <script>
+  (function () {
+    const body = document.body;
+    const btn = document.getElementById("theme-toggle");
+
+    function applyTheme(theme) {
+      if (theme === "dark") {
+        body.dataset.theme = "dark";
+        if (btn) btn.textContent = "☀️ Light";
+      } else {
+        delete body.dataset.theme;
+        if (btn) btn.textContent = "🌙 Dark";
+      }
+    }
+
+    const stored = localStorage.getItem("family-theme");
+    if (stored === "dark") {
+      applyTheme("dark");
+    }
+
+    if (btn) {
+      btn.addEventListener("click", () => {
+        const isDark = body.dataset.theme === "dark";
+        const next = isDark ? "light" : "dark";
+        applyTheme(next);
+        localStorage.setItem("family-theme", next);
+      });
+    }
+  })();
+    function calcHarmony() {
+  const safe = Number(document.getElementById("score-safe").value || 0);
+  const comfort = Number(document.getElementById("score-comfort").value || 0);
+  const align = Number(document.getElementById("score-align").value || 0);
+  const conflict = Number(document.getElementById("score-conflict").value || 0);
+  const bond = Number(document.getElementById("score-bond").value || 0);
+
+  const avg = (safe + comfort + align + conflict + bond) / 5;
+  const msg =
+    avg >= 8
+      ? "Gia đình đang ở vùng an toàn, hãy duy trì các thói quen tốt."
+      : avg >= 5
+      ? "Ổn nhưng còn nhiều chỗ có thể cải thiện nhẹ, hãy chọn 1–2 mục để tập trung."
+      : "Nên ngồi lại với nhau nghiêm túc, có thể cân nhắc trao đổi với chuyên gia nếu kéo dài.";
+
+  const result = document.getElementById("harmony-result");
+  if (result) {
+    result.textContent = `Điểm trung bình: ${avg.toFixed(1)} / 10 – ${msg}`;
+  }
+}
+
+</script>
+
 </body>
 </html>
